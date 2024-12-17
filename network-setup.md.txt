@@ -11,3 +11,18 @@ Server-PT Server2 210.3.14.2
 
 PC-PT PC3 168.90.0.2
 PC-PT PC4 210.3.14.2
+
+To setup DHCP we first need to open Router's CLI tab. Then we enter "enable" to give us access to execute commands. To enter
+global configuration mode we type "configure terminal". We first exclude router IP addreses from DHCP assignment so they
+won't be assigned to hosts. Then we configure each DHCP pool for the first and the second switch. It would look something 
+like this: 
+ip dhcp pool Switch0
+network 168.90.0.0 255.255.0.0
+default-router 168.90.0.1
+exit
+The same process goes for the second switch:
+ip dhcp pool Switch1
+network 210.3.14.0 255.255.255.0
+default-router 210.3.14.1
+exit
+To save the configuration we use the command: write memory. 
